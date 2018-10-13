@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="assets/images/faviconclock.ico" rel="icon" type="image/x-icon" />
+        
+        <style>
+            body {
+                background: #903030;
+            }
+
+            div {
+                position: absolute;
+                top:0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+            div.clock
+            {
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                border: 8px double white;
+            }
+
+            div.mount
+            {
+                width: 20px;
+                height: 20px;
+                background: #dddddd;
+                border-radius: 50%;
+                border: 1px solid #903030;
+            }
+
+            div.secondHand
+            {
+                width: 4px;
+                height: 130px;
+                background: skyblue;
+                bottom: 130px;
+                border: 1px solid #303030;
+                -webkit-transform-origin: 50% 100%;
+                -ms-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+            }
+
+            div.minuteHand
+            {
+                width: 8px;
+                height: 115px;
+                background: #dddddd;
+                bottom: 115px;
+                border: 1px solid #303030;
+                -webkit-transform-origin: 50% 100%;
+                -ms-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+            }
+
+            div.hourHand
+            {
+                width: 12px;
+                height: 100px;
+                background: #dddddd;
+                bottom: 100px;
+                border: 1px solid #303030;
+                -webkit-transform-origin: 50% 100%;
+                -ms-transform-origin: 50% 100%;
+                transform-origin: 50% 100%;
+            }
+
+            div.smallTick
+            {
+                width: 4px;
+                height: 15px;
+                background: #dddddd;
+                border-radius: 10%;
+            }
+
+            div.mediumTick
+            {
+                width: 6px;
+                height: 25px;
+                background: #dddddd;
+                border-radius: 10%;
+            }
+
+        </style>
+
+
+
+        <title>Analog Clock</title>
+    </head>
+    <body>
+        <div class="clock"></div>
+        <div class="hourHand"></div>
+        <div class="minuteHand"></div>
+        <div class="secondHand"></div>
+        <div class="mount"></div>
+
+        <script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script>
+            $(function () {
+        function rotate(d) {
+            return "-webkit-transform: rotate(" + d + "deg); transform: rotate(" + d + "deg); -ms-transform: rotate((" + d + "deg);"
+        }
+
+        for (i = 0; i < 360; i += 30) {
+            var radius = (300 - (i % 90 == 0 ? 20 : 10));
+            var angRad = i * (Math.PI / 180)
+            var x = Math.sin(angRad) * radius;
+            var y = Math.cos(angRad) * radius;
+
+            var sclass = "smallTick";
+            if (i % 90 == 0)
+                sclass = "mediumTick";
+
+            $(".clock").append("<div class='" + sclass + "' style='left: " + x + "px; bottom: " + y + "px;" + rotate(i) + "'></div>");
+        }
+
+        function SetHandPositions() {
+            var date = new Date();
+
+            var seconds = date.getSeconds();
+            var minutes = date.getMinutes();
+            var hours = date.getHours() % 12;
+
+            var secAngle = 360 * (seconds / 60);
+            var minAngle = 360 * (minutes / 60);
+            var hourAngle = 360 * (hours / 12);
+
+
+            console.log(hours + ":" + minutes + ":" + seconds);
+
+            $(".secondHand").css("-webkit-transform", "rotate(" + secAngle + "deg)");
+            $(".secondHand").css("transform", "rotate(" + secAngle + "deg)");
+            $(".secondHand").css("-ms-transform", "rotate(" + secAngle + "deg)");
+
+            $(".minuteHand").css("-webkit-transform", "rotate(" + minAngle + "deg)");
+            $(".minuteHand").css("transform", "rotate(" + minAngle + "deg)");
+            $(".minuteHand").css("-ms-transform", "rotate(" + minAngle + "deg)");
+
+            $(".hourHand").css("-webkit-transform", "rotate(" + hourAngle + "deg)");
+            $(".hourHand").css("transform", "rotate(" + hourAngle + "deg)");
+            $(".hourHand").css("-ms-transform", "rotate(" + hourAngle + "deg)");
+        }
+
+        setInterval(SetHandPositions, 1000);
+    });
+
+        </script>
+    </body>
+</html>
+
+
+<!--
+    All content and design is
+    Copyright (c) 2015 Tanise Williams, all rights reserved
+  -->
