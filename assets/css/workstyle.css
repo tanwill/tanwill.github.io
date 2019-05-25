@@ -14,7 +14,6 @@ body {
   -webkit-font-smoothing: antialiased;
   position:relative;
   font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
   color: black;
   background-color: white;
 }
@@ -104,7 +103,6 @@ body {
   border-bottom: none;
   padding-top: 2%;
   padding-bottom: 2%;
-  text-transform: normal !important;
 }
 
 a {
